@@ -28,15 +28,16 @@ MODULE_DESCRIPTION("A module to write current time on installation.");
 MODULE_VERSION("1");
 
 static int __init mod_init(void) {
- printk(KERN_INFO "Hello, World!\n");
+ printk(KERN_INFO "Print_Time Module Started.\n");
  struct timespec tm;
+ struct tm datetime;
  getnstimeofday(&tm);
- ktime_get_real();
- printk(KERN_INFO "TIME IS:%l", tm.tv_sec);
+ time_to_tm(tm.tv_sec, 0, &datetime);
+ printk(KERN_INFO "Time is: %d/%d/%d - %d:%d:%d", 1900 + datetime.tm_year, datetime.tm_mon, datetime.tm_mday, datetime.tm_hour, datetime.tm_min, datetime.tm_sec );
  return 0;
 }
 static void __exit mod_exit(void) {
- printk(KERN_INFO  "Goodbye, World!\n");
+ printk(KERN_INFO  "Module Exited\n");
 }
 module_init(mod_init);
 module_exit(mod_exit);
