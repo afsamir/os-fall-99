@@ -32,7 +32,7 @@ static int __init mod_init(void) {
  struct timespec tm;
  struct tm datetime;
  getnstimeofday(&tm);
- time_to_tm(tm.tv_sec, 0, &datetime);
+ time64_to_tm(tm.tv_sec, 0, &datetime);
  printk(KERN_INFO "Time is: %d/%d/%d - %d:%d:%d", 1900 + datetime.tm_year, datetime.tm_mon, datetime.tm_mday, datetime.tm_hour, datetime.tm_min, datetime.tm_sec );
  return 0;
 }
